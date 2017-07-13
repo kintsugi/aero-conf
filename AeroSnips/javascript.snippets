@@ -1,0 +1,106 @@
+snippet function ["function (a)..." [w]]
+function$1($2)
+{
+	$3
+};
+endsnippet
+
+snippet varfunction ["var a = function (b)..."]
+var $1 = function$2($3)
+{
+	$4
+};
+endsnippet
+
+snippet objfunction ["a.b = function (c)..."] 
+$1.$2 = function$3($4)
+{
+	$5
+};
+endsnippet
+
+snippet console ["console.log(a);" [w]]
+console.log($1);
+endsnippet
+
+snippet then ["a.then(function(b)...);"]
+$1.then(function($2)
+{
+	$3
+	return
+}, function(error)
+{
+	$4
+});
+endsnippet
+
+snippet returnthen ["return a.then(function(b)...);"]
+return $1.then(function($2)
+{
+	$3
+	return
+}, function(error)
+{
+	$4
+});
+endsnippet
+
+snippet if ["if (a)..." [w]]
+if ($1)
+{
+	$2
+}
+endsnippet
+snippet ifelse ["if (a)...else..."]
+if ($1)
+{
+	$2
+}
+else
+{
+	$3
+}
+endsnippet
+snippet ifelseif ["if (a)...else if (b)..."]
+if ($1)
+{
+	$2
+}
+else if ($3)
+{
+	$4
+}
+endsnippet
+
+snippet elseif ["else if(a)..." [w]]
+else if($1)
+{
+	$2
+}
+endsnippet
+
+snippet else ["else..." [w]]
+else
+{
+	$1
+}
+endsnippet
+
+snippet http_get ["anuglar http get"]
+return $http.get($1);
+endsnippet
+
+snippet http_get_then ["anuglar http get.then"]
+return $http.get($1).then(function(res)
+{
+	$2
+});
+endsnippet
+
+snippet for
+for($1; $2; $3)
+{
+	$4
+}
+endsnippet
+
