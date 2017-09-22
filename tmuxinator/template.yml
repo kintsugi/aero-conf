@@ -34,4 +34,3 @@ windows:
   - editor: vim
   - general: ls 
   - git: git status 
-  - elinks: elinks -no-connect

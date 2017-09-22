@@ -1,6 +1,6 @@
 # ~/.tmuxinator/aerorest.yml
 
-name: aerorest
+name: 1aerorest
 root: /Library/WebServer/Documents/aerorest
 
 # Optional tmux socket
@@ -34,4 +34,3 @@ windows:
   - editor: vim
   - general: ls 
   - git: git status 
-  - elinks: elinks -no-connect

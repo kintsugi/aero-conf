@@ -97,10 +97,16 @@ return $http.get($1).then(function(res)
 });
 endsnippet
 
-snippet for
+snippet for ["aerospace for"]
 for($1; $2; $3)
 {
 	$4
 }
 endsnippet
 
+snippet fori ["aerospace fori"]
+for(var $1 in $2)
+{
+	$2[$1];
+}
+endsnippet

@@ -1,5 +1,4 @@
 set nocompatible    " be iMproved, required
-filetype plugin indent on    " required
 syntax enable
 
 set shell=/bin/bash 
@@ -26,6 +25,7 @@ map <4-MiddleMouse> <Nop>
 imap <4-MiddleMouse> <Nop>
 
 vnoremap // y/<C-R>"<CR>
+vnoremap /f y/function <C-R>"<CR>
 
 " Mappings
 
@@ -66,14 +66,19 @@ nnoremap <leader>s :mksession<CR>
 " delimitMate auto line split
 imap <C-c> <CR><Esc>O
 
+" save folds 
+augroup AutoSaveFolds
+  autocmd!
+  autocmd BufWinLeave ?* mkview
+  autocmd BufWinEnter ?* silent loadview
+augroup END
 
 " Editor Settings
 "
 " A tab is 4 space characters with the size of two space characters
 set tabstop=4       " Sets the visual appearance of a tab to 2 spaces
 set shiftwidth=4    " Sets the # of tabs the << and >> operatorations indent
-set softtabstop=4   " Sets the # of columns used when tab is pressed
-set expandtab       " Turn all tabs into spaces
+set noexpandtab
 set smarttab        " insert tabs on the start of a line
 set autoindent      " Better indenting, used with smart indent
 set smartindent     " See :h autoindent and :h smartindent for details
@@ -87,7 +92,7 @@ set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is all lowercase,
 set incsearch       " show search matches as you type
 set hlsearch        " highlight search terms
-set wildignore=*.swp,*.bak,*.pyc,*.class,*/tmp/*,*.so,*.zip,*/vendor,*/node_modules,*/.DS_Store,*/ios,*/android,*/__tests__,*/flow-typed,*/release,*.o,*/node_modules/*,*/build/*
+set wildignore=*.swp,*.bak,*.pyc,*.class,*/tmp/*,*.so,*.zip,*/vendor,*/node_modules,*/.DS_Store,*/ios,*/android,*/__tests__,*/flow-typed,*/release,*.o,*/node_modules/*,*/build/*,*/bower_components/*,*/fonts/*
 set title           " change the terminal's title
 set visualbell      " don't beep
 set noerrorbells    " don't beep
@@ -127,10 +132,6 @@ Plug 'othree/jspc.vim'
 Plug 'SirVer/ultisnips'               
 " Trigger configuration.
 
-" Snippet repos 
-" general use snippets
-Plug 'honza/vim-snippets'
-" Graphics/UI Plugins
 " tmux integration for vim
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -185,24 +186,21 @@ Plug 'Raimondi/delimitMate'
 Plug 'easymotion/vim-easymotion'      
 
 " Syntax Plugins
-
 " async syntax checker
 Plug 'w0rp/ale'
 
+" html5 syntax
+Plug 'othree/html5.vim'
+
 " javascript syntax 
-Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
 Plug 'mxw/vim-jsx'
-" vim-jsx highlighting for .js files
-let g:jsx_ext_required = 0
 
 " syntax for json
 Plug 'elzr/vim-json'
 
 " syntax files for js libraries
 Plug 'othree/javascript-libraries-syntax.vim'
-
-" Misc. Plugins
-
 
 " personal wiki
 Plug 'vimwiki/vimwiki'
@@ -215,6 +213,14 @@ Plug 'embear/vim-localvimrc'
 
 Plug 'sumpygump/php-documentor-vim'
 call plug#end()
+
+filetype plugin indent on    " required
+
+" https://github.com/pangloss/vim-javascript/issues/467
+let g:javascript_opfirst = 1
+
+" vim-jsx highlighting for .js files
+let g:jsx_ext_required = 0
 
 au BufRead,BufNewFile *.md setlocal textwidth=80
 au BufRead,BufNewFile *.txt setlocal textwidth=80
@@ -251,8 +257,6 @@ let g:tern#filetypes = [
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 
-"Plug 'othree/jspc.vim'
-
 "Plug 'SirVer/ultisnips'               
 " Trigger configuration.
 let g:UltiSnipsExpandTrigger='<leader>e'
@@ -280,6 +284,9 @@ map <C-n> :NERDTreeToggle<CR>
 " vim-airline section settings
 let g:airline#extensions#branch#enabled = 1     " enable git branch info
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#branch#displayed_head_limit = 20
+let g:airline_section_x = ''
+let g:airline_section_y = ''
 set showtabline=0
 
 " color themes for status bar
@@ -372,13 +379,12 @@ endfunction
 
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
 " ctrlp fuzzy search
 nnoremap <silent><C-p> :CtrlSpace O<CR>
-let g:CtrlSpaceIgnoredFiles = '\v(node_modules)[\/]'
+let g:CtrlSpaceIgnoredFiles = '\v(node_modules|bower_components|fonts|build)[\/]'
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+let g:CtrlSpaceMaxHeight = 10
 
-Plug 'embear/vim-localvimrc'             
 " Don't ask when loading a local vimrc
 let g:localvimrc_ask = 0
 

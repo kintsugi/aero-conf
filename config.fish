@@ -1,12 +1,6 @@
 set fish_greeting ""
 # use vi keybindings like bash vi mode
 fish_vi_key_bindings
-function fish_user_key_bindings
-    for mode in insert default visual
-        bind -M $mode \cf forward-char
-    end
-end
-
 # env vars
 set -x EDITOR vim
 
@@ -41,6 +35,7 @@ alias cdp="cd ~/dev/proj/"
 alias rmrf="rm -rf"
 alias cdvb="cd ~/.vim/bundle"
 alias cdnvb="cd ~/.nvim/bundle"
+alias cdweb="cd /Library/WebServer/Documents"
 
 # node aliases
 alias npmis="npm install --save"
@@ -55,10 +50,12 @@ alias gcam="git commit -am"
 alias ts="~/ts.sh"
 
 # misc. aliases
+alias v="vim"
 # open macvim in fullscreen
 alias mvimf="mvim -c \"set fu\""
 # start lynx in vi mode
 alias vlynx="lynx -vikeys http://google.com"
+alias fix="fuck"
 
 # setting $PATH
 # user tools
@@ -80,7 +77,6 @@ function setproxy
     set -xU proxy http://30883:$pp@proxy-west.aero.org:8080/
     set -xU http_proxy http://30883:$pp@proxy-west.aero.org:8080/
     set -xU https_proxy http://30883:$pp@proxy-west.aero.org:8080/
-    echo $proxy
 
     npm config set https-proxy http://30883:$pp@proxy-west.aero.org:8080
 
@@ -96,4 +92,4 @@ alias gbpurge 'git branch --merged | grep -Ev "(\*|master|development|staging)" 
 set -x proxy http://30883:(date +"%a" | tr '[:upper:]' '[:lower:]')@proxy-west.aero.org:8080
 set -x http_proxy http://30883:(date +"%a" | tr '[:upper:]' '[:lower:]')@proxy-west.aero.org:8080
 set -x https_proxy http://30883:(date +"%a" | tr '[:upper:]' '[:lower:]')@proxy-west.aero.org:8080
-set -g fish_user_paths "/usr/local/opt/openssl/bin" $fish_user_paths
+

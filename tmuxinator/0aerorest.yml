@@ -1,7 +1,7 @@
-# ~/.tmuxinator/workspace.yml
+# ~/.tmuxinator/0aerorest.yml
 
-name: 1workspace
-root: /Library/WebServer/Documents/workspace
+name: 0aerorest
+root: ~/
 
 # Optional tmux socket
 # socket_name: foo
@@ -28,9 +28,16 @@ root: /Library/WebServer/Documents/workspace
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t workspace
+# post: tmux -CC attach -t 0aerorest
 
 windows:
-  - editor: vim
-  - general: ls 
-  - git: git status 
+  - editor:
+      layout: main-vertical
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      panes:
+        - vim
+        - guard
+  - server: bundle exec rails s
+  - logs: tail -f log/development.log

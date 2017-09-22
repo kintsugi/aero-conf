@@ -1,6 +1,6 @@
-# ~/.tmuxinator/workspace.yml
+# ~/.tmuxinator/workspace-react.yml
 
-name: 1workspace
+name: workspace-react
 root: /Library/WebServer/Documents/workspace
 
 # Optional tmux socket
@@ -31,6 +31,11 @@ root: /Library/WebServer/Documents/workspace
 # post: tmux -CC attach -t workspace
 
 windows:
-  - editor: vim
-  - general: ls 
+  - react: cd react; and vim
+  - angular: vim
+  - general:
+        layout: 3722,272x84,0,0{205x84,0,0,20,66x84,206,0,22}
+        panes:
+            - # empty
+            - npm run dev
   - git: git status 

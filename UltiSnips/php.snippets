@@ -1,0 +1,141 @@
+snippet foreach
+foreach($$1 as $$2)
+{
+	$3
+}
+endsnippet
+
+snippet function
+function $1($2)
+{
+	$3
+}
+endsnippet
+
+snippet php
+<?php
+$1
+?>
+endsnippet
+
+snippet class
+class $1
+{
+	function __construct()
+	{
+		$2
+	}
+}
+endsnippet
+snippet if "if (a)..." w
+if($1)
+{
+	$2
+}
+endsnippet
+snippet ifelse "if (a)...else..."
+if($1)
+{
+	$2
+}
+else
+{
+	$3
+}
+endsnippet
+snippet ifelseif "if (a)...else if (b)..."
+if($1)
+{
+	$2
+}
+else if($3)
+{
+	$4
+}
+endsnippet
+
+snippet elseif "else if(a)..." w
+else if($1)
+{
+	$2
+}
+endsnippet
+
+snippet else "else..." w
+else
+{
+	$1
+}
+endsnippet
+
+snippet echo
+echo $1;
+endsnippet
+
+snippet vardump
+var_dump($1);
+endsnippet
+
+snippet printr
+printr($1);
+endsnippet
+
+snippet trycatch
+try
+{
+	$2
+}
+catch($1 $e)
+{
+	$3
+}
+endsnippet
+
+snippet statementexecute
+if($statement->execute())
+{
+	$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+	return array(
+		'status' => 'success',
+		'data' => $rows,
+	);
+}
+else
+{
+	return array(
+		'status' => 'failed',
+		'data' => array(
+			'errors' => array(
+				'failed to execute query $1',
+				$statement->errorInfo()
+			)
+		)
+	);
+}
+endsnippet
+
+snippet iffailedstatus
+if($$1['status'] !== 'success')
+{
+	return $$1;
+}
+endsnippet
+
+snippet returnsuccess
+return array('status' => 'success');
+endsnippet
+
+snippet returnsuccessdata
+return array(
+	'status' => 'success',
+	'data' => $1
+);
+endsnippet
+
+snippet returnfail
+return array(
+	'status' => 'failed',
+	'data' => $1
+);
+endsnippet
+

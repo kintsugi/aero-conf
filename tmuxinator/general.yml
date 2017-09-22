@@ -1,6 +1,6 @@
 # ~/.tmuxinator/general.yml
 
-name: general
+name: 0general
 root: ~/
 
 # Optional tmux socket
@@ -35,4 +35,3 @@ windows:
     - calendar: vim ~/vimwiki/diary/diary.wiki -c "call ToggleCalendar()"
     - editor: vim
     - git: 
-    - elinks: elinks -no-connect

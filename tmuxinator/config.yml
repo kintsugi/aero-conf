@@ -37,4 +37,3 @@ windows:
   - fish: vimfish
   - bash_profile: vim ~/.bash_profile
   - bashrc: vim ~/.bashrc
-  - elinks: elinks -no-connect

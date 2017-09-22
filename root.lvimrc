@@ -1,9 +1,4 @@
-set shiftwidth=4
-set tabstop=4
-set noexpandtab
-
 let g:ale_linters = {
 	  \   'javascript': ['jshint'],
 	  \   'jsx': ['jshint'],
 	  \}
-let g:UltiSnipsSnippetDirectories=["~/.vim/AeroSnips"]
