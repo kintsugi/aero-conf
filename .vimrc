@@ -1,5 +1,6 @@
 set nocompatible    " be iMproved, required
 syntax enable
+filetype plugin indent on    " required
 
 set shell=/bin/bash 
 let $BASH_ENV = "~/.bash_aliases"
@@ -56,22 +57,21 @@ nnoremap <leader>l   :bnext<CR>
 " use ,/ to clear highlighted search
 nmap <silent> ,/ :nohlsearch<CR>
 
+" map ,F to create a fold at
+map <leader>F v%zf
+
 
 " Command to trim whitespace from end of lines
 command Trim %s/\s\+$//e
+
+" vim fugitive git commit -a --verbose
+command Gca Gcommit -a --verbose
 
 " save session
 nnoremap <leader>s :mksession<CR>
 
 " delimitMate auto line split
 imap <C-c> <CR><Esc>O
-
-" save folds 
-augroup AutoSaveFolds
-  autocmd!
-  autocmd BufWinLeave ?* mkview
-  autocmd BufWinEnter ?* silent loadview
-augroup END
 
 " Editor Settings
 "
@@ -92,7 +92,7 @@ set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is all lowercase,
 set incsearch       " show search matches as you type
 set hlsearch        " highlight search terms
-set wildignore=*.swp,*.bak,*.pyc,*.class,*/tmp/*,*.so,*.zip,*/vendor,*/node_modules,*/.DS_Store,*/ios,*/android,*/__tests__,*/flow-typed,*/release,*.o,*/node_modules/*,*/build/*,*/bower_components/*,*/fonts/*
+set wildignore=*.swp,*.bak,*.pyc,*.class,*/tmp/*,*.so,*.zip,*/vendor,*/node_modules,*/.DS_Store,*/ios,*/android,*/__tests__,*/flow-typed,*/release,*.o,*/node_modules/*,*/build/*,*/bower_components/*,*/fonts/*,*/uploads/*
 set title           " change the terminal's title
 set visualbell      " don't beep
 set noerrorbells    " don't beep
@@ -105,9 +105,9 @@ set lazyredraw
 set nocursorcolumn
 set nocursorline
 set norelativenumber
-syntax sync minlines=256
 set regexpengine=1
 set rnu
+set ttyfast
 
 "Place backups in a tmp folder
 set backup
@@ -166,6 +166,7 @@ Plug 'scrooloose/nerdcommenter'
 
 " Git wrapper
 Plug 'tpope/vim-fugitive'             
+Plug 'tommcdo/vim-fubitive'
 
 " surround words with characters
 Plug 'tpope/vim-surround'             
@@ -212,9 +213,16 @@ Plug 'mattn/calendar-vim'
 Plug 'embear/vim-localvimrc'             
 
 Plug 'sumpygump/php-documentor-vim'
+
+Plug 'posva/vim-vue'
+Plug 'digitaltoad/vim-pug'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'myusuf3/numbers.vim'
 call plug#end()
 
-filetype plugin indent on    " required
+" disable checking for processing in vim-vue t
+let g:vue_disable_pre_processors=1
 
 " https://github.com/pangloss/vim-javascript/issues/467
 let g:javascript_opfirst = 1
@@ -322,6 +330,8 @@ let g:airline_symbols.linenr = ''
 "Plug 'ctrlpvim/ctrlp.vim'             
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_extensions = ['line']
+map <C-o> :CtrlPLine %<CR>
 
 "Plug 'junegunn/vim-easy-align'
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -376,13 +386,22 @@ function! ToggleCalendar()
   end
 endfunction
 :autocmd FileType vimwiki map <leader>c :call ToggleCalendar()
+ 
+" Toggles line number mode.
+function! g:ToggleNuMode()
+	if(&rnu == 1)
+		set nornu
+	else
+		set rnu 
+	endif                                               
+endfunc
+nnoremap <leader>l :call g:ToggleNuMode()<cr>
 
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 " ctrlp fuzzy search
 nnoremap <silent><C-p> :CtrlSpace O<CR>
 let g:CtrlSpaceIgnoredFiles = '\v(node_modules|bower_components|fonts|build)[\/]'
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
 let g:CtrlSpaceMaxHeight = 10
 
 " Don't ask when loading a local vimrc

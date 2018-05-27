@@ -12,6 +12,13 @@ export default class $1 extends Component {
 }
 endsnippet
 
+snippet for
+for(let i = 0; i < $1; ++i) {
+	$2
+}
+endsnippet
+
+
 snippet fori
 for(let ${1:} in $2) {
 	$3
@@ -123,3 +130,12 @@ endsnippet
 snippet props "this.props" w
 this.props.$1
 endsnippet
+
+snippet class
+class $1 {
+	constructor($2) {
+		$3
+	}
+}
+endsnippet
+
